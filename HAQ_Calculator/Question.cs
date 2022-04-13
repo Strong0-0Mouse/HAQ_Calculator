@@ -35,25 +35,27 @@ namespace HAQ_Calculator
                 BorderThickness = new Thickness(1),
                 Margin = new Thickness(10),
                 VerticalAlignment = VerticalAlignment.Center,
-                UseLayoutRounding = true
+                UseLayoutRounding = true,
+                Background = new SolidColorBrush { Color = Colors.PowderBlue, Opacity=0.3 }
             };
-            var mainStack = new StackPanel();
+
+            var mainDock = new DockPanel();
 
             var stackAnswers = new StackPanel
             {
-                VerticalAlignment = VerticalAlignment.Center,
+               Orientation = Orientation.Horizontal,
+               HorizontalAlignment = HorizontalAlignment.Right
             };
             if (_answers == null)
             {
-                mainStack.Orientation = Orientation.Horizontal;
                 for (var i = 0; i < 4; i++)
                 {
                     var button = new RadioButton
                     {
                         Content = i,
                         FontSize = 16,
-                        VerticalAlignment = VerticalAlignment.Center,
-                        IsChecked = false
+                        IsChecked = false,
+                        Margin = new Thickness(20, 15, 20, 15),
                     };
                     if (i == 0)
                         button.IsChecked = true;
@@ -64,16 +66,16 @@ namespace HAQ_Calculator
             else
             {
                 var i = 0; 
-                mainStack.Orientation = Orientation.Vertical;
                 stackAnswers.Orientation = Orientation.Vertical;
                 foreach (var answer in _answers)
                 {
                     var button = new CheckBox
                     {
-                        Content = answer,
+                        Content = new TextBlock { Text=answer, TextWrapping = TextWrapping.Wrap },
                         Name = $"A{i}",
                         FontSize = 16,
-                        IsChecked = false
+                        IsChecked = false,
+                       Margin = new Thickness(0, 5, 0, 5),
                     };
                     button.Click += ButtonOnClick;
                     stackAnswers.Children.Add(button);
@@ -81,10 +83,13 @@ namespace HAQ_Calculator
                 }
             }
 
-            mainStack.Children.Add(new TextBlock
-                {Text = _questionText, FontSize = 16, Margin = new Thickness(0, 0, 10, 0)});
-            mainStack.Children.Add(stackAnswers);
-            mainBorder.Child = mainStack;
+            var question = new TextBlock
+            { Text = _questionText, FontSize = 18, Margin = new Thickness(10, 10, 10, 10), Width = 600, TextWrapping = TextWrapping.Wrap };
+            DockPanel.SetDock(stackAnswers, Dock.Right);
+            DockPanel.SetDock(question, Dock.Left);
+            mainDock.Children.Add(question);
+            mainDock.Children.Add(stackAnswers);
+            mainBorder.Child = mainDock;
 
             return mainBorder;
         }
