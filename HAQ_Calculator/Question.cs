@@ -41,10 +41,11 @@ namespace HAQ_Calculator
 
             var stackAnswers = new StackPanel
             {
-                VerticalAlignment = VerticalAlignment.Center
+                VerticalAlignment = VerticalAlignment.Center,
             };
             if (_answers == null)
             {
+                mainStack.Orientation = Orientation.Horizontal;
                 for (var i = 0; i < 4; i++)
                 {
                     var button = new RadioButton
@@ -54,6 +55,8 @@ namespace HAQ_Calculator
                         VerticalAlignment = VerticalAlignment.Center,
                         IsChecked = false
                     };
+                    if (i == 0)
+                        button.IsChecked = true;
                     button.Checked += ButtonOnChecked;
                     stackAnswers.Children.Add(button);
                 }
@@ -61,10 +64,11 @@ namespace HAQ_Calculator
             else
             {
                 var i = 0; 
+                mainStack.Orientation = Orientation.Vertical;
                 stackAnswers.Orientation = Orientation.Vertical;
                 foreach (var answer in _answers)
                 {
-                    var button = new CheckBox()
+                    var button = new CheckBox
                     {
                         Content = answer,
                         Name = $"A{i}",
