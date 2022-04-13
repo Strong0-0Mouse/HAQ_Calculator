@@ -20,25 +20,25 @@ namespace HAQ_Calculator
             GettingUp.GotFocus += ChapterGotFocus;
             Meal.GotFocus += ChapterGotFocus;
             Walks.GotFocus += ChapterGotFocus;
-            // Hygiene.GotFocus += ChapterGotFocus;
-            // AchievableRange.GotFocus += ChapterGotFocus;
-            // PowerBrushes.GotFocus += ChapterGotFocus;
-            // OtherActivities.GotFocus += ChapterGotFocus;
+            Hygiene.GotFocus += ChapterGotFocus;
+            AchievableRange.GotFocus += ChapterGotFocus;
+            PowerBrushes.GotFocus += ChapterGotFocus;
+            OtherActivities.GotFocus += ChapterGotFocus;
 
             _haqCalculator.IncludeChapters = 8;
             
-            AddQuestions("NameDressingAndPersonalCare", DressingAndPersonalCare, QuestionsDressingAndPersonalCare);
+            AddQuestions("Одевание и уход за собой", DressingAndPersonalCare, QuestionsDressingAndPersonalCare);
             AddQuestions("Вставание", GettingUp, QuestionsGettingUp);
             AddQuestions("Питание", Meal, QuestionsMeal);
             AddQuestions("Ходьба", Walks, QuestionsWalks);
             AddQuestions("Приспособления", FirstHalfFixtures);
-            // AddQuestions(FirstHalfNeedHelp);
-            // AddQuestions(Hygiene, QuestionsHygiene);
-            // AddQuestions(AchievableRange, QuestionsAchievableRange);
-            // AddQuestions(PowerBrushes, QuestionsPowerBrushes);
-            // AddQuestions(OtherActivities, QuestionsOtherActivities);
-            // AddQuestions(SecondHalfFixtures);
-            // AddQuestions(SecondHalfNeedHelp);
+            AddQuestions("Нужда в посторонней помощи", FirstHalfNeedHelp);
+            AddQuestions("Гигиена", Hygiene, QuestionsHygiene);
+            AddQuestions("Достижимый радиус действия", AchievableRange, QuestionsAchievableRange);
+            AddQuestions("Сила кистей", PowerBrushes, QuestionsPowerBrushes);
+            AddQuestions("Прочие виды деятельности", OtherActivities, QuestionsOtherActivities);
+            AddQuestions("Приспособления", SecondHalfFixtures);
+            AddQuestions("Нужда в посторонней помощи", SecondHalfNeedHelp);
         }
 
         private void ChapterGotFocus(object sender, RoutedEventArgs e)
@@ -143,19 +143,19 @@ namespace HAQ_Calculator
                 case Chapters.Walks:
                     SetEnabledProperty(_haqCalculator.Walks, IndicatorWalks);
                     break;
-                // case Chapters.Hygiene:
-                //     SetEnabledProperty(_haqCalculator.Hygiene, IndicatorHygiene);
-                //     break;
-                // case Chapters.AchievableRange:
-                //     SetEnabledProperty(_haqCalculator.AchievableRange, IndicatorAchievableRange);
-                //     break;
-                // case Chapters.PowerBrushes:
-                //     SetEnabledProperty(_haqCalculator.PowerBrushes, IndicatorPowerBrushes);
-                //     break;
-                // case Chapters.OtherActivities:
-                //     SetEnabledProperty(_haqCalculator.OtherActivities, IndicatorOtherActivities);
-                //     break;
-            }
+                case Chapters.Hygiene:
+                    SetEnabledProperty(_haqCalculator.Hygiene, IndicatorHygiene);
+                    break;
+                case Chapters.AchievableRange:
+                    SetEnabledProperty(_haqCalculator.AchievableRange, IndicatorAchievableRange);
+                    break;
+                case Chapters.PowerBrushes:
+                    SetEnabledProperty(_haqCalculator.PowerBrushes, IndicatorPowerBrushes);
+                    break;
+                case Chapters.OtherActivities:
+                    SetEnabledProperty(_haqCalculator.OtherActivities, IndicatorOtherActivities);
+                    break;
+         }
         }
     }
 }

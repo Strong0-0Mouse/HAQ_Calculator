@@ -175,7 +175,7 @@
             <GroupBox x:Name="DressingAndPersonalCare" Style="{StaticResource QuadrupleQuestionGroupBox}">
                 <GroupBox.Header>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <TextBlock Style="{StaticResource StandardTextBlock}" FontSize="18"/>
+                        <TextBlock Style="{StaticResource StandardTextBlock}" />
                         <Button Style="{StaticResource StandardButton}" Content="  Не учитывать раздел  "/>
                     </StackPanel>
                 </GroupBox.Header>
@@ -229,7 +229,85 @@
                 <StackPanel>
                 </StackPanel>
             </GroupBox>
-            
+
+            <GroupBox x:Name="FirstHalfNeedHelp" Style="{StaticResource MultiplyQuestionGroupBox}">
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource StandardTextBlock}"/>
+                    </StackPanel>
+                </GroupBox.Header>
+                <StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox x:Name="Hygiene" Style="{StaticResource QuadrupleQuestionGroupBox}">
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource StandardTextBlock}"/>
+                        <Button Style="{StaticResource StandardButton}" Content="  Не учитывать раздел  "/>
+                    </StackPanel>
+                </GroupBox.Header>
+                <StackPanel x:Name="QuestionsHygiene" IsEnabled="{Binding Hygiene.IsEnabled}">
+                    <Ellipse x:Name="IndicatorHygiene" Style="{StaticResource Indicator}"/>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox x:Name="AchievableRange" Style="{StaticResource QuadrupleQuestionGroupBox}">
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource StandardTextBlock}"/>
+                        <Button Style="{StaticResource StandardButton}" Content="  Не учитывать раздел  "/>
+                    </StackPanel>
+                </GroupBox.Header>
+                <StackPanel x:Name="QuestionsAchievableRange" IsEnabled="{Binding AchievableRange.IsEnabled}">
+                    <Ellipse x:Name="IndicatorAchievableRange" Style="{StaticResource Indicator}"/>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox x:Name="PowerBrushes" Style="{StaticResource QuadrupleQuestionGroupBox}">
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource StandardTextBlock}"/>
+                        <Button Style="{StaticResource StandardButton}" Content="  Не учитывать раздел  "/>
+                    </StackPanel>
+                </GroupBox.Header>
+                <StackPanel x:Name="QuestionsPowerBrushes" IsEnabled="{Binding PowerBrushes.IsEnabled}">
+                    <Ellipse x:Name="IndicatorPowerBrushes" Style="{StaticResource Indicator}"/>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox x:Name="OtherActivities" Style="{StaticResource QuadrupleQuestionGroupBox}">
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource StandardTextBlock}"/>
+                        <Button Style="{StaticResource StandardButton}" Content="  Не учитывать раздел  "/>
+                    </StackPanel>
+                </GroupBox.Header>
+                <StackPanel x:Name="QuestionsOtherActivities" IsEnabled="{Binding OtherActivities.IsEnabled}">
+                    <Ellipse x:Name="IndicatorOtherActivities" Style="{StaticResource Indicator}"/>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox x:Name="SecondHalfFixtures" Style="{StaticResource MultiplyQuestionGroupBox}">
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource StandardTextBlock}"/>
+                    </StackPanel>
+                </GroupBox.Header>
+                <StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox x:Name="SecondHalfNeedHelp" Style="{StaticResource MultiplyQuestionGroupBox}">
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource StandardTextBlock}"/>
+                    </StackPanel>
+                </GroupBox.Header>
+                <StackPanel>
+                </StackPanel>
+            </GroupBox>
+
         </StackPanel>
     </ScrollViewer>
 </Window>

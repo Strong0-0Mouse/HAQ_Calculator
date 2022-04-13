@@ -55,7 +55,7 @@ namespace HAQ_Calculator
                         Content = i,
                         FontSize = 16,
                         IsChecked = false,
-                        Margin = new Thickness(20, 15, 20, 15),
+                        Margin = new Thickness(35, 15, 35, 15),
                     };
                     if (i == 0)
                         button.IsChecked = true;
@@ -75,7 +75,8 @@ namespace HAQ_Calculator
                         Name = $"A{i}",
                         FontSize = 16,
                         IsChecked = false,
-                       Margin = new Thickness(0, 5, 0, 5),
+                        Margin = new Thickness(0, 5, 0, 5),
+                        Width = 350
                     };
                     button.Click += ButtonOnClick;
                     stackAnswers.Children.Add(button);
@@ -100,7 +101,7 @@ namespace HAQ_Calculator
             {
                 case Chapters.FirstHalfFixtures:
                     if (answerNum == _answers.Count - 1 && (sender as CheckBox)?.IsChecked == true)
-                        ((sender as CheckBox)!.Parent as StackPanel)!.Children.Add(new TextBox());
+                        ((sender as CheckBox)!.Parent as StackPanel)!.Children.Add(new TextBox { Margin= new Thickness(0, 10, 10, 10), FontSize=16});
                     else if (answerNum == _answers.Count - 1 && (sender as CheckBox)?.IsChecked == false)
                         ((sender as CheckBox)!.Parent as StackPanel)!.Children.RemoveAt(
                             ((sender as CheckBox)!.Parent as StackPanel)!.Children.Count - 1);
@@ -130,7 +131,7 @@ namespace HAQ_Calculator
                     break;
                 case Chapters.SecondHalfFixtures:
                     if (answerNum == _answers.Count - 1 && (sender as CheckBox)?.IsChecked == true)
-                        ((sender as CheckBox)!.Parent as StackPanel)!.Children.Add(new TextBox());
+                        ((sender as CheckBox)!.Parent as StackPanel)!.Children.Add(new TextBox { Margin = new Thickness(0, 10, 10, 10), FontSize = 16 });
                     else if (answerNum == _answers.Count - 1 && (sender as CheckBox)?.IsChecked == false)
                         ((sender as CheckBox)!.Parent as StackPanel)!.Children.RemoveAt(
                             ((sender as CheckBox)!.Parent as StackPanel)!.Children.Count - 1);
