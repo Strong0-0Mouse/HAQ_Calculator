@@ -13,6 +13,14 @@
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
+        <Style TargetType="Border" x:Key="StandardBorder">
+            <Setter Property="UseLayoutRounding" Value="True"/>
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="CornerRadius" Value="7"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            
+        </Style>
         <Style TargetType="Button" x:Key="StandardButton">
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="Margin" Value="5"/>
@@ -325,6 +333,85 @@
                                 <TextBlock FontSize="16" Text="Значние: "/>
                                 <TextBox FontSize="16" Text="{Binding Pain}" TextChanged="PainTextChanged"/>
                             </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    
+                    <GroupBox Style="{StaticResource MultiplyQuestionGroupBox}">
+                        <GroupBox.Header>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Style="{StaticResource StandardTextBlock}" Text="Реузльтаты"/>
+                            </StackPanel>
+                        </GroupBox.Header>
+                        <StackPanel>
+                            <DockPanel>
+                                <Border Style="{StaticResource StandardBorder}" DockPanel.Dock="Left">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource StandardBorder}">
+                                            <DockPanel VerticalAlignment="Center">
+                                                <TextBlock FontSize="14" Text="Одевание и уход за собой" Margin="5,0,10,0" DockPanel.Dock="Left"/>
+                                                <Ellipse x:Name="IndicatorDressingAndPersonalCareResult" Style="{StaticResource Indicator}" DockPanel.Dock="Right" Margin="0,0,5,0"/>
+                                            </DockPanel>
+                                        </Border>
+                                        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource StandardBorder}">
+                                            <DockPanel VerticalAlignment="Center">
+                                                <TextBlock FontSize="14" Text="Вставание" Margin="5,0,10,0" DockPanel.Dock="Left"/>
+                                                <Ellipse x:Name="IndicatorGettingUpResult" Style="{StaticResource Indicator}" DockPanel.Dock="Right" Margin="0,0,5,0"/>
+                                            </DockPanel>
+                                        </Border>
+                                        <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource StandardBorder}">
+                                            <DockPanel VerticalAlignment="Center">
+                                                <TextBlock FontSize="14" Text="Питание" Margin="5,0,10,0" DockPanel.Dock="Left"/>
+                                                <Ellipse x:Name="IndicatorMealResult" Style="{StaticResource Indicator}" DockPanel.Dock="Right" Margin="0,0,5,0"/>
+                                            </DockPanel>
+                                        </Border>
+                                        <Border Grid.Row="3" Grid.Column="0" Style="{StaticResource StandardBorder}">
+                                            <DockPanel VerticalAlignment="Center">
+                                                <TextBlock FontSize="14" Text="Ходьба" Margin="5,0,10,0" DockPanel.Dock="Left"/>
+                                                <Ellipse x:Name="IndicatorWalksResult" Style="{StaticResource Indicator}" DockPanel.Dock="Right" Margin="0,0,5,0"/>
+                                            </DockPanel>
+                                        </Border>
+                                        
+                                        <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource StandardBorder}">
+                                            <DockPanel VerticalAlignment="Center">
+                                                <TextBlock FontSize="14" Text="Гигиена" Margin="5,0,10,0" DockPanel.Dock="Left"/>
+                                                <Ellipse x:Name="IndicatorHygieneResult" Style="{StaticResource Indicator}" DockPanel.Dock="Right" Margin="0,0,5,0"/>
+                                            </DockPanel>
+                                        </Border>
+                                        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource StandardBorder}">
+                                            <DockPanel VerticalAlignment="Center">
+                                                <TextBlock FontSize="14" Text="Достижимый радиус действия" Margin="5,0,10,0" DockPanel.Dock="Left"/>
+                                                <Ellipse x:Name="IndicatorAchievableRangeResult" Style="{StaticResource Indicator}" DockPanel.Dock="Right" Margin="0,0,5,0"/>
+                                            </DockPanel>
+                                        </Border>
+                                        <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource StandardBorder}">
+                                            <DockPanel VerticalAlignment="Center">
+                                                <TextBlock FontSize="14" Text="Сила кистей" Margin="5,0,10,0" DockPanel.Dock="Left"/>
+                                                <Ellipse x:Name="IndicatorPowerBrushesResult" Style="{StaticResource Indicator}" DockPanel.Dock="Right" Margin="0,0,5,0"/>
+                                            </DockPanel>
+                                        </Border>
+                                        <Border Grid.Row="3" Grid.Column="1" Style="{StaticResource StandardBorder}">
+                                            <DockPanel VerticalAlignment="Center">
+                                                <TextBlock FontSize="14" Text="Прочие виды деятельности" Margin="5,0,10,0" DockPanel.Dock="Left"/>
+                                                <Ellipse x:Name="IndicatorOtherActivitiesResult" Style="{StaticResource Indicator}" DockPanel.Dock="Right" Margin="0,0,5,0"/>
+                                            </DockPanel>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                                <StackPanel DockPanel.Dock="Right">
+                                    <Button Style="{StaticResource StandardButton}" Content="Результат"/>
+                                    <Button Style="{StaticResource StandardButton}" Content="Стереть"/>
+                                </StackPanel>
+                            </DockPanel>
                         </StackPanel>
                     </GroupBox>
                 </StackPanel>

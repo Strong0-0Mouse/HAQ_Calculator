@@ -83,6 +83,11 @@ namespace HAQ_Calculator
             }
         }
 
+        private void AddResult()
+        {
+            
+        }
+
         private void PainChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             _haqCalculator.Pain = Math.Round(SliderPain.Value);
@@ -108,12 +113,14 @@ namespace HAQ_Calculator
             }
         }
 
-        private void SetEnabledProperty(Chapter chapter, Ellipse item)
+        private void SetEnabledProperty(Chapter chapter, Ellipse item, Ellipse resultItem = null)
         {
             if (chapter.IsEnabled)
             {
                 chapter.IsEnabled = false;
                 item.Fill = Brushes.Red;
+                if (resultItem != null) 
+                    resultItem.Fill = Brushes.Red;
                 _haqCalculator.IncludeChapters--;
                 _haqCalculator.TotalPoints -= chapter.TotalPoints;
             }
@@ -121,6 +128,8 @@ namespace HAQ_Calculator
             {
                 chapter.IsEnabled = true;
                 item.Fill = Brushes.Green;
+                if (resultItem != null) 
+                    resultItem.Fill = Brushes.Green;
                 _haqCalculator.IncludeChapters++;
                 _haqCalculator.TotalPoints += chapter.TotalPoints;
             }
@@ -136,28 +145,35 @@ namespace HAQ_Calculator
             switch (_haqCalculator.ActiveChapter)
             {
                 case Chapters.DressingAndPersonalCare:
-                    SetEnabledProperty(_haqCalculator.DressingAndPersonalCare, IndicatorDressingAndPersonalCare);
+                    SetEnabledProperty(_haqCalculator.DressingAndPersonalCare, IndicatorDressingAndPersonalCare, IndicatorDressingAndPersonalCareResult);
                     break;
                 case Chapters.GettingUp:
-                    SetEnabledProperty(_haqCalculator.GettingUp, IndicatorGettingUp);
+                    SetEnabledProperty(_haqCalculator.GettingUp, IndicatorGettingUp, 
+                        IndicatorGettingUpResult);
                     break;
                 case Chapters.Meal:
-                    SetEnabledProperty(_haqCalculator.Meal, IndicatorMeal);
+                    SetEnabledProperty(_haqCalculator.Meal, IndicatorMeal, 
+                        IndicatorMealResult);
                     break;
                 case Chapters.Walks:
-                    SetEnabledProperty(_haqCalculator.Walks, IndicatorWalks);
+                    SetEnabledProperty(_haqCalculator.Walks, IndicatorWalks, 
+                        IndicatorWalksResult);
                     break;
                 case Chapters.Hygiene:
-                    SetEnabledProperty(_haqCalculator.Hygiene, IndicatorHygiene);
+                    SetEnabledProperty(_haqCalculator.Hygiene, IndicatorHygiene, 
+                        IndicatorHygieneResult);
                     break;
                 case Chapters.AchievableRange:
-                    SetEnabledProperty(_haqCalculator.AchievableRange, IndicatorAchievableRange);
+                    SetEnabledProperty(_haqCalculator.AchievableRange, IndicatorAchievableRange,
+                        IndicatorAchievableRangeResult);
                     break;
                 case Chapters.PowerBrushes:
-                    SetEnabledProperty(_haqCalculator.PowerBrushes, IndicatorPowerBrushes);
+                    SetEnabledProperty(_haqCalculator.PowerBrushes, IndicatorPowerBrushes, 
+                        IndicatorPowerBrushesResult);
                     break;
                 case Chapters.OtherActivities:
-                    SetEnabledProperty(_haqCalculator.OtherActivities, IndicatorOtherActivities);
+                    SetEnabledProperty(_haqCalculator.OtherActivities, IndicatorOtherActivities, 
+                        IndicatorOtherActivitiesResult);
                     break;
          }
         }
