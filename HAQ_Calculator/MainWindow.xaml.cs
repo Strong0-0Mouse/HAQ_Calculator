@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -39,6 +40,7 @@ namespace HAQ_Calculator
             AddQuestions("Прочие виды деятельности", OtherActivities, QuestionsOtherActivities);
             AddQuestions("Приспособления", SecondHalfFixtures);
             AddQuestions("Нужда в посторонней помощи", SecondHalfNeedHelp);
+            AddQuestions("Боль", Pain, StackPain);
         }
 
         private void ChapterGotFocus(object sender, RoutedEventArgs e)
@@ -53,7 +55,8 @@ namespace HAQ_Calculator
             var lines = _haqCalculator.GetQuestions(chapter);
             var questionNum = 0;
             if (chapter != Chapters.FirstHalfFixtures && chapter != Chapters.SecondHalfFixtures &&
-                chapter != Chapters.FirstHalfNeedHelp && chapter != Chapters.SecondHalfNeedHelp)
+                chapter != Chapters.FirstHalfNeedHelp && chapter != Chapters.SecondHalfNeedHelp &&
+                chapter != Chapters.Pain)
             {
                 foreach (var questionElement in lines)
                 {
@@ -66,6 +69,12 @@ namespace HAQ_Calculator
                 ((item.Header as StackPanel)!.Children[1] as Button)!.Click += EnabledChanged;
                 item.Content = stack;
             }
+            else if (chapter == Chapters.Pain)
+            {
+                ((item.Header as StackPanel)!.Children[0] as TextBlock)!.Text = header;
+                var question = new Question(lines[0], _haqCalculator, chapter, 0, new List<string>());
+                stack?.Children.Insert(0, question.GetControl());
+            }
             else
             {
                 ((item.Header as StackPanel)!.Children[0] as TextBlock)!.Text = header;
@@ -74,35 +83,30 @@ namespace HAQ_Calculator
             }
         }
 
-        // private void PainChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        // {
-        //     _haqCalculator.Pain = Math.Round(SliderPain.Value);
-        // }
-        //
-        // private void PainTextChanged(object sender, TextChangedEventArgs e)
-        // {
-        //     try
-        //     {
-        //         var value = int.Parse((sender as TextBox)!.Text);
-        //         (sender as TextBox)!.Text = value switch
-        //         {
-        //             > 100 => "100",
-        //             < 0 => "0",
-        //             _ => (sender as TextBox)!.Text
-        //         };
-        //         _haqCalculator.Pain = int.Parse((sender as TextBox)!.Text);
-        //         SliderPain.Value = int.Parse((sender as TextBox)!.Text);
-        //     }
-        //     catch
-        //     {
-        //         (sender as TextBox)!.Text = string.Empty;
-        //     }
-        // }
-        //
-        // private void EnabledChanged(object sender, RoutedEventArgs e)
-        // {
+        private void PainChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            _haqCalculator.Pain = Math.Round(SliderPain.Value);
+        }
         
-        // }
+        private void PainTextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                var value = int.Parse((sender as TextBox)!.Text);
+                (sender as TextBox)!.Text = value switch
+                {
+                    > 100 => "100",
+                    < 0 => "0",
+                    _ => (sender as TextBox)!.Text
+                };
+                _haqCalculator.Pain = int.Parse((sender as TextBox)!.Text);
+                SliderPain.Value = int.Parse((sender as TextBox)!.Text);
+            }
+            catch
+            {
+                (sender as TextBox)!.Text = string.Empty;
+            }
+        }
 
         private void SetEnabledProperty(Chapter chapter, Ellipse item)
         {

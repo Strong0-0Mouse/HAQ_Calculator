@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -65,22 +66,29 @@ namespace HAQ_Calculator
             }
             else
             {
-                var i = 0; 
                 stackAnswers.Orientation = Orientation.Vertical;
-                foreach (var answer in _answers)
+                if (_chapter == Chapters.Pain)
                 {
-                    var button = new CheckBox
+                    
+                }
+                else
+                {
+                    var i = 0; 
+                    foreach (var answer in _answers)
                     {
-                        Content = new TextBlock { Text=answer, TextWrapping = TextWrapping.Wrap },
-                        Name = $"A{i}",
-                        FontSize = 16,
-                        IsChecked = false,
-                        Margin = new Thickness(0, 5, 0, 5),
-                        Width = 350
-                    };
-                    button.Click += ButtonOnClick;
-                    stackAnswers.Children.Add(button);
-                    i++;
+                        var button = new CheckBox
+                        {
+                            Content = new TextBlock { Text=answer, TextWrapping = TextWrapping.Wrap },
+                            Name = $"A{i}",
+                            FontSize = 16,
+                            IsChecked = false,
+                            Margin = new Thickness(0, 5, 0, 5),
+                            Width = 350
+                        };
+                        button.Click += ButtonOnClick;
+                        stackAnswers.Children.Add(button);
+                        i++;
+                    }
                 }
             }
 
@@ -94,6 +102,7 @@ namespace HAQ_Calculator
 
             return mainBorder;
         }
+
         private void ButtonOnClick(object sender, RoutedEventArgs e)
         {
             var answerNum = int.Parse((sender as CheckBox)!.Name.Remove(0, 1));

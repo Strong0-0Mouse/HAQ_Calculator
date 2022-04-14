@@ -13,6 +13,7 @@
         PowerBrushes,
         OtherActivities,
         SecondHalfFixtures,
-        SecondHalfNeedHelp
+        SecondHalfNeedHelp,
+        Pain
     }
 }

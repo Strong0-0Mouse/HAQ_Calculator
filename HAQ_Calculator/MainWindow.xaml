@@ -307,6 +307,21 @@
                 <StackPanel>
                 </StackPanel>
             </GroupBox>
+            
+            <GroupBox x:Name="Pain" Style="{StaticResource MultiplyQuestionGroupBox}">
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource StandardTextBlock}"/>
+                    </StackPanel>
+                </GroupBox.Header>
+                <StackPanel x:Name="StackPain">
+                    <Slider x:Name="SliderPain" Value="0" Minimum="0" Maximum="100" SmallChange="1" LargeChange="10" IsSelectionRangeEnabled="True" Height="100" ValueChanged="PainChanged"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontSize="16" Text="Значние: "/>
+                        <TextBox FontSize="16" Text="{Binding Pain}" TextChanged="PainTextChanged"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
 
         </StackPanel>
     </ScrollViewer>
