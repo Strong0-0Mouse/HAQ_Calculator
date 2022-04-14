@@ -63,121 +63,6 @@
             </Style.Resources>
         </Style>
     </Window.Resources>
-    <!-- <StackPanel> -->
-    <!--     <ToolBar Height="25" VerticalAlignment="Top"> -->
-    <!--         <Button x:Name="ChangeEnableChapterButton" Click="EnabledChanged">Сменить активность раздела</Button> -->
-    <!--         <Button x:Name="Print">Печать</Button> -->
-    <!--     </ToolBar> -->
-    <!--     <TabControl> -->
-    <!--         <TabItem Background="Transparent" Header="Первая половина"> -->
-    <!--             <TabControl> -->
-    <!--                 <TabItem x:Name="DressingAndPersonalCare" Background="Transparent" Header="Одевание и уход за собой"> -->
-    <!--                     <StackPanel x:Name="QuestionsDressingAndPersonalCare" IsEnabled="{Binding DressingAndPersonalCare.IsEnabled}"> -->
-    <!--                     </StackPanel> -->
-    <!--                 </TabItem> -->
-    <!--                 <TabItem x:Name="GettingUp" Background="Transparent" Header="Вставание"> -->
-    <!--                     <StackPanel x:Name="QuestionsGettingUp" IsEnabled="{Binding GettingUp.IsEnabled}"> -->
-    <!--                     </StackPanel> -->
-    <!--                 </TabItem> -->
-    <!--                 <TabItem x:Name="Meal" Background="Transparent" Header="Прием пищи"> -->
-    <!--                     <StackPanel x:Name="QuestionsMeal" IsEnabled="{Binding Meal.IsEnabled}"> -->
-    <!--                     </StackPanel> -->
-    <!--                 </TabItem> -->
-    <!--                 <TabItem x:Name="Walks" Background="Transparent" Header="Прогулки"> -->
-    <!--                     <StackPanel x:Name="QuestionsWalks" IsEnabled="{Binding Walks.IsEnabled}"> -->
-    <!--                     </StackPanel> -->
-    <!--                 </TabItem> -->
-    <!--                 <TabItem x:Name="FirstHalfFixtures" Background="Transparent" Header="Приспособления"> -->
-    <!--                 </TabItem> -->
-    <!--                 <TabItem x:Name="FirstHalfNeedHelp" Background="Transparent" Header="Нужда в посторонней помощи"> -->
-    <!--                 </TabItem> -->
-    <!--             </TabControl> -->
-    <!--         </TabItem>  -->
-    <!--          -->
-    <!--         <TabItem Background="Transparent" Header="Вторая половина"> -->
-    <!--             <TabControl> -->
-    <!--                 <TabItem x:Name="Hygiene" Background="Transparent" Header="Гигиена"> -->
-    <!--                     <StackPanel x:Name="QuestionsHygiene" IsEnabled="{Binding Hygiene.IsEnabled}"> -->
-    <!--                     </StackPanel> -->
-    <!--                 </TabItem> -->
-    <!--                 <TabItem x:Name="AchievableRange" Background="Transparent" Header="Достижимый радиус действия"> -->
-    <!--                     <StackPanel x:Name="QuestionsAchievableRange" IsEnabled="{Binding AchievableRange.IsEnabled}"> -->
-    <!--                     </StackPanel> -->
-    <!--                 </TabItem> -->
-    <!--                 <TabItem x:Name="PowerBrushes" Background="Transparent" Header="Сила кистей"> -->
-    <!--                     <StackPanel x:Name="QuestionsPowerBrushes" IsEnabled="{Binding PowerBrushes.IsEnabled}"> -->
-    <!--                     </StackPanel> -->
-    <!--                 </TabItem> -->
-    <!--                 <TabItem x:Name="OtherActivities" Background="Transparent" Header="Прочие виды деятельности"> -->
-    <!--                     <StackPanel x:Name="QuestionsOtherActivities" IsEnabled="{Binding OtherActivities.IsEnabled}"> -->
-    <!--                     </StackPanel> -->
-    <!--                 </TabItem> -->
-    <!--                 <TabItem x:Name="SecondHalfFixtures" Background="Transparent" Header="Приспособления"> -->
-    <!--                 </TabItem> -->
-    <!--                 <TabItem x:Name="SecondHalfNeedHelp" Background="Transparent" Header="Нужда в посторонней помощи"> -->
-    <!--                 </TabItem> -->
-    <!--             </TabControl> -->
-    <!--         </TabItem>  -->
-    <!--          -->
-    <!--         <TabItem Background="Transparent" Header="Боль"> -->
-    <!--             <StackPanel> -->
-    <!--                 <TextBlock FontSize="16" Text="Мы также хотим узнать испытываете ли Вы боли из-за вашего заболевания. Какой силы боль Вы испытывали НА ПРОШЛОЙ НЕДЕЛЕ?"/> -->
-    <!--                 <TextBlock FontSize="16" Text="0 - боль отсутствует, 100 - боль крайне сильная"/> -->
-    <!--                 <Slider x:Name="SliderPain" Value="0" Minimum="0" Maximum="100" SmallChange="1" LargeChange="10" IsSelectionRangeEnabled="True" Height="100" ValueChanged="PainChanged"/> -->
-    <!--                 <StackPanel Orientation="Horizontal"> -->
-    <!--                     <TextBlock FontSize="16" Text="Значние: "/> -->
-    <!--                     <TextBox FontSize="16" Text="{Binding Pain}" TextChanged="PainTextChanged"/> -->
-    <!--                 </StackPanel> -->
-    <!--             </StackPanel> -->
-    <!--         </TabItem> -->
-    <!--          -->
-    <!--         <TabItem Background="Transparent" Header="Результаты"> -->
-    <!--             <StackPanel> -->
-    <!--                 <StackPanel Orientation="Horizontal"> -->
-    <!--                     <Expander Header="Первая половина вопросов"> -->
-    <!--                         <StackPanel> -->
-    <!--                             <TextBlock FontSize="16" Text="{Binding DressingAndPersonalCare.TotalPoints, StringFormat=Одевание и уход за собой: {0}б.}"/> -->
-    <!--                             <TextBlock FontSize="16" Text="{Binding GettingUp.TotalPoints, StringFormat=Вставание: {0}б.}"/> -->
-    <!--                             <TextBlock FontSize="16" Text="{Binding Meal.TotalPoints, StringFormat=Прием пищи: {0}б.}"/> -->
-    <!--                             <TextBlock FontSize="16" Text="{Binding Walks.TotalPoints, StringFormat=Прогулки: {0}б.}"/> -->
-    <!--                             <TextBlock FontSize="16" Text="{Binding FirstHalf.TotalPoints, StringFormat=Дополнительные баллы: {0}б.}"/> -->
-    <!--                         </StackPanel> -->
-    <!--                     </Expander> -->
-    <!--                     <Separator Width="10" Visibility="Hidden"/> -->
-    <!--                     <Expander Header="Вторая половина вопросов"> -->
-    <!--                         <StackPanel> -->
-    <!--                             <TextBlock FontSize="16" Text="{Binding Hygiene.TotalPoints, StringFormat=Гигиена: {0}б.}"/> -->
-    <!--                             <TextBlock FontSize="16" Text="{Binding AchievableRange.TotalPoints, StringFormat=Достижимый радиус действия: {0}б.}"/> -->
-    <!--                             <TextBlock FontSize="16" Text="{Binding PowerBrushes.TotalPoints, StringFormat=Сила кистей: {0}б.}"/> -->
-    <!--                             <TextBlock FontSize="16" Text="{Binding OtherActivities.TotalPoints, StringFormat=Прочие виды деятельности: {0}б.}"/> -->
-    <!--                             <TextBlock FontSize="16" Text="{Binding SecondHalf.TotalPoints, StringFormat=Дополнительные баллы: {0}б.}"/> -->
-    <!--                         </StackPanel> -->
-    <!--                     </Expander> -->
-    <!--                 </StackPanel> -->
-    <!--                 <TextBlock FontSize="16" Text="{Binding Pain, StringFormat=Боль: {0}}"/> -->
-    <!--                 <StackPanel Orientation="Horizontal"> -->
-    <!--                     <TextBlock FontSize="16" Text="HAQ ("/> -->
-    <!--                     <TextBlock FontSize="16" Text="{Binding TotalPoints}"/> -->
-    <!--                     <TextBlock FontSize="16" Text="/"/> -->
-    <!--                     <TextBlock FontSize="16" Text="{Binding IncludeChapters}"/> -->
-    <!--                     <TextBlock FontSize="16" Text=") = "/> -->
-    <!--                     <TextBlock FontSize="16"> -->
-    <!--                         <TextBlock.Style> -->
-    <!--                             <Style TargetType="{x:Type TextBlock}"> -->
-    <!--                                 <Setter Property="Text" Value="{Binding Haq}" /> -->
-    <!--                                 <Style.Triggers> -->
-    <!--                                     <DataTrigger Binding="{Binding Haq}" Value="-1"> -->
-    <!--                                         <Setter Property="Text" Value="Кол-во заполненных разделов должно быть ≥ 6"/>  -->
-    <!--                                     </DataTrigger> -->
-    <!--                                 </Style.Triggers> -->
-    <!--                             </Style>  -->
-    <!--                         </TextBlock.Style> -->
-    <!--                     </TextBlock> -->
-    <!--                 </StackPanel> -->
-    <!--             </StackPanel> -->
-    <!--         </TabItem>  -->
-    <!--     </TabControl> -->
-    <!-- </StackPanel> -->
     <TabControl>
         <TabItem>
             <TabItem.Header>
@@ -408,8 +293,8 @@
                                     </Grid>
                                 </Border>
                                 <StackPanel DockPanel.Dock="Right">
-                                    <Button Style="{StaticResource StandardButton}" Content="Результат"/>
-                                    <Button Style="{StaticResource StandardButton}" Content="Стереть"/>
+                                    <Button Style="{StaticResource StandardButton}" Content="Результат" Click="OutputResult"/>
+                                    <Button Style="{StaticResource StandardButton}" Content="Стереть" Click="ClearTest"/>
                                 </StackPanel>
                             </DockPanel>
                         </StackPanel>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,21 +27,51 @@ namespace HAQ_Calculator
             PowerBrushes.GotFocus += ChapterGotFocus;
             OtherActivities.GotFocus += ChapterGotFocus;
 
+            InitializeTest(false);
+        }
+
+        private void InitializeTest(bool isReinitialize)
+        {
             _haqCalculator.IncludeChapters = 8;
-            
-            AddQuestions("Одевание и уход за собой", DressingAndPersonalCare, QuestionsDressingAndPersonalCare);
-            AddQuestions("Вставание", GettingUp, QuestionsGettingUp);
-            AddQuestions("Питание", Meal, QuestionsMeal);
-            AddQuestions("Ходьба", Walks, QuestionsWalks);
-            AddQuestions("Приспособления", FirstHalfFixtures);
-            AddQuestions("Нужда в посторонней помощи", FirstHalfNeedHelp);
-            AddQuestions("Гигиена", Hygiene, QuestionsHygiene);
-            AddQuestions("Достижимый радиус действия", AchievableRange, QuestionsAchievableRange);
-            AddQuestions("Сила кистей", PowerBrushes, QuestionsPowerBrushes);
-            AddQuestions("Прочие виды деятельности", OtherActivities, QuestionsOtherActivities);
-            AddQuestions("Приспособления", SecondHalfFixtures);
-            AddQuestions("Нужда в посторонней помощи", SecondHalfNeedHelp);
-            AddQuestions("Боль", Pain, StackPain);
+            _haqCalculator.TotalPoints = 0;
+            _haqCalculator.Haq = 0;
+            _haqCalculator.DressingAndPersonalCare.IsEnabled = false;
+            _haqCalculator.GettingUp.IsEnabled = false;
+            _haqCalculator.Meal.IsEnabled = false;
+            _haqCalculator.Walks.IsEnabled = false;
+            _haqCalculator.Hygiene.IsEnabled = false;
+            _haqCalculator.AchievableRange.IsEnabled = false;
+            _haqCalculator.PowerBrushes.IsEnabled = false;
+            _haqCalculator.OtherActivities.IsEnabled = false;
+            SetEnabledProperty(_haqCalculator.DressingAndPersonalCare, IndicatorDressingAndPersonalCare,
+                IndicatorDressingAndPersonalCareResult);
+            SetEnabledProperty(_haqCalculator.GettingUp, IndicatorGettingUp, 
+                IndicatorGettingUpResult);
+            SetEnabledProperty(_haqCalculator.Meal, IndicatorMeal, 
+                IndicatorMealResult);
+            SetEnabledProperty(_haqCalculator.Walks, IndicatorWalks, 
+                IndicatorWalksResult);
+            SetEnabledProperty(_haqCalculator.Hygiene, IndicatorHygiene, 
+                IndicatorHygieneResult);
+            SetEnabledProperty(_haqCalculator.AchievableRange, IndicatorAchievableRange,
+                IndicatorAchievableRangeResult);
+            SetEnabledProperty(_haqCalculator.PowerBrushes, IndicatorPowerBrushes, 
+                IndicatorPowerBrushesResult);
+            SetEnabledProperty(_haqCalculator.OtherActivities, IndicatorOtherActivities, 
+                IndicatorOtherActivitiesResult);
+            AddQuestions("Одевание и уход за собой", DressingAndPersonalCare, isReinitialize, QuestionsDressingAndPersonalCare);
+            AddQuestions("Вставание", GettingUp, isReinitialize, QuestionsGettingUp);
+            AddQuestions("Питание", Meal, isReinitialize, QuestionsMeal);
+            AddQuestions("Ходьба", Walks, isReinitialize, QuestionsWalks);
+            AddQuestions("Приспособления", FirstHalfFixtures, isReinitialize);
+            AddQuestions("Нужда в посторонней помощи", FirstHalfNeedHelp, isReinitialize);
+            AddQuestions("Гигиена", Hygiene, isReinitialize, QuestionsHygiene);
+            AddQuestions("Достижимый радиус действия", AchievableRange, isReinitialize, QuestionsAchievableRange);
+            AddQuestions("Сила кистей", PowerBrushes, isReinitialize, QuestionsPowerBrushes);
+            AddQuestions("Прочие виды деятельности",  OtherActivities, isReinitialize, QuestionsOtherActivities);
+            AddQuestions("Приспособления", SecondHalfFixtures, isReinitialize);
+            AddQuestions("Нужда в посторонней помощи", SecondHalfNeedHelp, isReinitialize);
+            AddQuestions("Боль", Pain, isReinitialize, StackPain);
         }
 
         private void ChapterGotFocus(object sender, RoutedEventArgs e)
@@ -49,7 +80,7 @@ namespace HAQ_Calculator
             _haqCalculator.ActiveChapter = chapter;
         }
 
-        private void AddQuestions(string header, HeaderedContentControl item, Panel stack = null)
+        private void AddQuestions(string header, HeaderedContentControl item, bool isReinitialize, Panel stack = null)
         {
             var chapter = (Chapters) Enum.Parse(typeof(Chapters), item.Name, true);
             var lines = _haqCalculator.GetQuestions(chapter);
@@ -58,34 +89,41 @@ namespace HAQ_Calculator
                 chapter != Chapters.FirstHalfNeedHelp && chapter != Chapters.SecondHalfNeedHelp &&
                 chapter != Chapters.Pain)
             {
+                if (isReinitialize)
+                    for (var i = 0; i < lines.Count; i++)
+                        stack?.Children.RemoveAt(stack.Children.Count - 1);
+                        
                 foreach (var questionElement in lines)
                 {
                     var question = new Question(questionElement, _haqCalculator, chapter, questionNum);
                     stack?.Children.Add(question.GetControl());
                     questionNum++;
                 }
-
+                
                 ((item.Header as StackPanel)!.Children[0] as TextBlock)!.Text = header;
-                ((item.Header as StackPanel)!.Children[1] as Button)!.Click += EnabledChanged;
+                if (!isReinitialize)
+                    ((item.Header as StackPanel)!.Children[1] as Button)!.Click += EnabledChanged;
                 item.Content = stack;
             }
             else if (chapter == Chapters.Pain)
             {
                 ((item.Header as StackPanel)!.Children[0] as TextBlock)!.Text = header;
                 var question = new Question(lines[0], _haqCalculator, chapter, 0, new List<string>());
+                if (isReinitialize)
+                {
+                    stack?.Children.RemoveAt(0);
+                    SliderPain.Value = 0;
+                }
+
                 stack?.Children.Insert(0, question.GetControl());
             }
             else
             {
                 ((item.Header as StackPanel)!.Children[0] as TextBlock)!.Text = header;
                 var questionElement = new Question(lines[0], _haqCalculator, chapter, 0, lines.Skip(1).ToList());
+                stack?.Children.Clear();
                 item.Content = questionElement.GetControl();
             }
-        }
-
-        private void AddResult()
-        {
-            
         }
 
         private void PainChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -145,7 +183,8 @@ namespace HAQ_Calculator
             switch (_haqCalculator.ActiveChapter)
             {
                 case Chapters.DressingAndPersonalCare:
-                    SetEnabledProperty(_haqCalculator.DressingAndPersonalCare, IndicatorDressingAndPersonalCare, IndicatorDressingAndPersonalCareResult);
+                    SetEnabledProperty(_haqCalculator.DressingAndPersonalCare, IndicatorDressingAndPersonalCare,
+                        IndicatorDressingAndPersonalCareResult);
                     break;
                 case Chapters.GettingUp:
                     SetEnabledProperty(_haqCalculator.GettingUp, IndicatorGettingUp, 
@@ -176,6 +215,24 @@ namespace HAQ_Calculator
                         IndicatorOtherActivitiesResult);
                     break;
          }
+        }
+
+        private void OutputResult(object sender, RoutedEventArgs e)
+        {
+            _haqCalculator.Haq = _haqCalculator.TotalPoints / _haqCalculator.IncludeChapters;
+            if (_haqCalculator.IncludeChapters < 6)
+                MessageBox.Show(
+                    $"Кол-во учитываемых разделов должно быть ≥ 6\nСейчас учитывается лишь {_haqCalculator.IncludeChapters}",
+                    "Ошибка");
+            else
+                MessageBox.Show(
+                    $"HAQ ({_haqCalculator.TotalPoints}/{_haqCalculator.IncludeChapters}) = {_haqCalculator.Haq}",
+                    "Результат");
+        }
+
+        private void ClearTest(object sender, RoutedEventArgs e)
+        {
+            InitializeTest(true);
         }
     }
 }
