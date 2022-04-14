@@ -343,25 +343,25 @@
                 <Border Grid.Row="3" Grid.Column="0" Style="{StaticResource StandardBorder}" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock FontSize="14" Text="{Binding Walks.TotalPoints, StringFormat=Прогулки: {0}б.}" Margin="10"/>
                 </Border>
-                <ComboBox Grid.Row="4" Grid.Column="0" Height="30" Style="{StaticResource StandardComboBox}" IsEditable ="False">
-                    <TextBlock>LG Nexus 5X</TextBlock>
-                    <TextBlock>Huawai Nexus 6P</TextBlock>
-                    <TextBlock>iPhone 6S</TextBlock>
-                    <TextBlock>iPhone 6S Plus</TextBlock>
-                    <TextBlock>Microsoft Lumia 950</TextBlock>
-                </ComboBox>
                 
-                <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource StandardBorder}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Border Grid.Row="0" Grid.Column="2" Style="{StaticResource StandardBorder}" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock FontSize="14" Text="{Binding Hygiene.TotalPoints, StringFormat=Гигиена: {0}б.}" Margin="10"/>
                 </Border>
-                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource StandardBorder}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource StandardBorder}" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock FontSize="14" Text="{Binding AchievableRange.TotalPoints, StringFormat=Достижимый радиус действия: {0}б.}" Margin="10"/>
                 </Border>
-                <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource StandardBorder}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Border Grid.Row="2" Grid.Column="2" Style="{StaticResource StandardBorder}" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock FontSize="14" Text="{Binding PowerBrushes.TotalPoints, StringFormat=Сила кистей: {0}б.}" Margin="10"/>
                 </Border>
-                <Border Grid.Row="3" Grid.Column="1" Style="{StaticResource StandardBorder}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Border Grid.Row="3" Grid.Column="2" Style="{StaticResource StandardBorder}" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock FontSize="14" Text="{Binding OtherActivities.TotalPoints, StringFormat=Прочие виды деятельности: {0}б.}" Margin="10"/>
+                </Border>
+                
+                <Border Grid.Row="0" Grid.Column="4" Grid.RowSpan="2" Style="{StaticResource StandardBorder}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel Margin="10" HorizontalAlignment="Center">
+                        <TextBlock FontSize="14" Text="ВАШ"  HorizontalAlignment="Center"/>
+                        <TextBlock FontSize="14" Text="{Binding Pain}"  HorizontalAlignment="Center"/>
+                    </StackPanel>
                 </Border>
             </Grid>
         </TabItem>
