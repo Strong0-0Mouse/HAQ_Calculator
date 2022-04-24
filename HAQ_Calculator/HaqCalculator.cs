@@ -46,9 +46,13 @@ namespace HAQ_Calculator
         private double _totalPoints;
         private double _pain;
         private double _haq;
+        private double _deltaHaq;
         private double _includeChapters;
         
         public Chapters ActiveChapter { get; set; }
+
+        public double PrevHaq { get; set; }
+
         public double IncludeChapters
         {
             get => _includeChapters;
@@ -67,6 +71,17 @@ namespace HAQ_Calculator
                 OnPropertyChanged();
             }
         }
+        
+        public double DeltaHaq
+        {
+            get => _deltaHaq;
+            set
+            {
+                _deltaHaq = Math.Round(value, 2);
+                OnPropertyChanged();
+            }
+        }
+        
         public double TotalPoints
         {
             get => _totalPoints;

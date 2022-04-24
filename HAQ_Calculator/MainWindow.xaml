@@ -321,8 +321,6 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -331,37 +329,86 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource StandardBorder}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <TextBlock FontSize="14" Text="{Binding DressingAndPersonalCare.TotalPoints, StringFormat=Одевание и уход за собой: {0}б.}" Margin="10"/>
                 </Border>
-                <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource StandardBorder}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <TextBlock FontSize="14" Text="{Binding GettingUp.TotalPoints, StringFormat=Вставание: {0}б.}" Margin="10"/>
                 </Border>
-                <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource StandardBorder}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <TextBlock FontSize="14" Text="{Binding Meal.TotalPoints, StringFormat=Прием пищи: {0}б.}" Margin="10"/>
                 </Border>
-                <Border Grid.Row="3" Grid.Column="0" Style="{StaticResource StandardBorder}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Border Grid.Row="3" Grid.Column="0" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <TextBlock FontSize="14" Text="{Binding Walks.TotalPoints, StringFormat=Прогулки: {0}б.}" Margin="10"/>
                 </Border>
+                <Border Grid.Row="4" Grid.Column="0" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid x:Name="FirstHalfInfo">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock FontSize="14" Text="{Binding FirstHalf.TotalPoints, StringFormat=Приспособления: {0}б.}" Margin="10"/>
+                            <Button x:Name="FirstHalfButtonInfo" Content="▼" Style="{StaticResource StandardButton}"/>
+                        </StackPanel>                        
+                    </Grid>
+                </Border>
                 
-                <Border Grid.Row="0" Grid.Column="2" Style="{StaticResource StandardBorder}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                
+                <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <TextBlock FontSize="14" Text="{Binding Hygiene.TotalPoints, StringFormat=Гигиена: {0}б.}" Margin="10"/>
                 </Border>
-                <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource StandardBorder}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <TextBlock FontSize="14" Text="{Binding AchievableRange.TotalPoints, StringFormat=Достижимый радиус действия: {0}б.}" Margin="10"/>
                 </Border>
-                <Border Grid.Row="2" Grid.Column="2" Style="{StaticResource StandardBorder}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <TextBlock FontSize="14" Text="{Binding PowerBrushes.TotalPoints, StringFormat=Сила кистей: {0}б.}" Margin="10"/>
                 </Border>
-                <Border Grid.Row="3" Grid.Column="2" Style="{StaticResource StandardBorder}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Border Grid.Row="3" Grid.Column="1" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <TextBlock FontSize="14" Text="{Binding OtherActivities.TotalPoints, StringFormat=Прочие виды деятельности: {0}б.}" Margin="10"/>
-                </Border>
-                
-                <Border Grid.Row="0" Grid.Column="4" Grid.RowSpan="2" Style="{StaticResource StandardBorder}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                </Border>                
+                <Border Grid.Row="4" Grid.Column="1" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid x:Name="SecondHalfInfo">                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock FontSize="14" Text="{Binding SecondHalf.TotalPoints, StringFormat=Приспособления: {0}б.}" Margin="10"/>
+                            <Button x:Name="SecondHalfButtonInfo" Content="▼" Style="{StaticResource StandardButton}"/>
+                        </StackPanel>                        
+                    </Grid>
+                </Border>                
+
+                <Border Grid.Row="0" Grid.Column="2" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <StackPanel Margin="10" HorizontalAlignment="Center">
                         <TextBlock FontSize="14" Text="ВАШ"  HorizontalAlignment="Center"/>
                         <TextBlock FontSize="14" Text="{Binding Pain}"  HorizontalAlignment="Center"/>
                     </StackPanel>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="2" Grid.RowSpan="4" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <GroupBox Style="{StaticResource MultiplyQuestionGroupBox}">
+                        <GroupBox.Header>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Style="{StaticResource StandardTextBlock}" Text="ΔHAQ"/>
+                            </StackPanel>
+                        </GroupBox.Header>
+                        <StackPanel Margin="10" HorizontalAlignment="Center">
+                            <StackPanel Margin="10" Orientation="Horizontal">
+                                <TextBlock FontSize="14" Text="Предыдущий HAQ: "/>
+                                <TextBox x:Name="PrevHaqValue" FontSize="14"/>
+                            </StackPanel>
+                            <StackPanel Margin="10" Orientation="Horizontal">
+                                <TextBlock FontSize="14" Text="Нынешний HAQ: "/>
+                                <TextBlock FontSize="14" Text="{Binding Haq}"/>
+                            </StackPanel>
+                            <StackPanel Margin="10" Orientation="Horizontal">
+                                <TextBlock FontSize="14" Text="ΔHAQ: "/>
+                                <TextBlock FontSize="14" Text="{Binding DeltaHaq}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
                 </Border>
             </Grid>
         </TabItem>

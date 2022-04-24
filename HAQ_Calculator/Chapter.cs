@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using HAQ_Calculator.Annotations;
@@ -28,6 +29,8 @@ namespace HAQ_Calculator
                 OnPropertyChanged();
             }
         }
+
+        public ObservableCollection<string> ListAnswers { get; set; } = new();
         
         public List<int> QuestionsPoints { get; set; }
         public int AdditionalPoints { get; set; }

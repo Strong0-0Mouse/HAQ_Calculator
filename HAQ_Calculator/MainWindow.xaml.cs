@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -13,6 +15,10 @@ namespace HAQ_Calculator
     public partial class MainWindow
     {
         private readonly HaqCalculator _haqCalculator;
+
+        private bool _isOpenFirstHalfINfo;
+        private bool _isOpenSecondHalfINfo;
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -26,23 +32,162 @@ namespace HAQ_Calculator
             AchievableRange.GotFocus += ChapterGotFocus;
             PowerBrushes.GotFocus += ChapterGotFocus;
             OtherActivities.GotFocus += ChapterGotFocus;
+            
+            FirstHalfButtonInfo.Click += FirstHalfButtonInfoOnClick;
+            _haqCalculator.FirstHalf.ListAnswers.CollectionChanged += ListAnswersFirstOnCollectionChanged;
+            
+            SecondHalfButtonInfo.Click += SecondHalfButtonInfoOnClick;
+            _haqCalculator.SecondHalf.ListAnswers.CollectionChanged += ListAnswersSecondOnCollectionChanged;
+
+            PrevHaqValue.TextChanged += PrevHaqValueOnTextChanged;
 
             InitializeTest(false);
         }
 
+        private void PrevHaqValueOnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                var value = double.Parse((sender as TextBox)!.Text);
+                (sender as TextBox)!.Text = value switch
+                {
+                    > 3.5 => "3.5",
+                    < 0 => "0",
+                    _ => (sender as TextBox)!.Text
+                };
+                _haqCalculator.PrevHaq = double.Parse((sender as TextBox)!.Text);
+                _haqCalculator.DeltaHaq = _haqCalculator.Haq / _haqCalculator.PrevHaq;
+            }
+            catch
+            {
+                (sender as TextBox)!.Text = string.Empty;
+            }
+        }
+
+        #region FirstHalf
+
+        private void ListAnswersFirstOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            _isOpenFirstHalfINfo = !_isOpenFirstHalfINfo;
+            UpdateFirstList();
+            _isOpenFirstHalfINfo = !_isOpenFirstHalfINfo;
+            UpdateFirstList();
+        }
+
+        private void FirstHalfButtonInfoOnClick(object sender, RoutedEventArgs e)
+        {
+            _isOpenFirstHalfINfo = !_isOpenFirstHalfINfo;
+            UpdateFirstList();
+        }
+
+        private void UpdateFirstList()
+        {
+            if (_isOpenFirstHalfINfo)
+            {
+                var scroll = new ScrollViewer();
+                var stack = new StackPanel();
+                foreach (var answer in _haqCalculator.FirstHalf.ListAnswers)
+                {
+                    var textBlock = new TextBox {Text = answer, TextWrapping = TextWrapping.Wrap};
+                    textBlock.TextChanged += TextBlockFirstOnTextChanged;
+                    stack.Children.Add(textBlock);
+                }
+                scroll.Content = stack;
+                Grid.SetRow(scroll, 2);
+                FirstHalfInfo.Children.Add(scroll);
+            }
+            else
+            {
+                FirstHalfInfo.Children.RemoveAt(FirstHalfInfo.Children.Count - 1);
+            }
+        }
+
+        private void TextBlockFirstOnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            _isOpenFirstHalfINfo = !_isOpenFirstHalfINfo;
+            UpdateFirstList();
+            _isOpenFirstHalfINfo = !_isOpenFirstHalfINfo;
+            UpdateFirstList();
+        }
+
+        #endregion
+
+        #region SecondHalf
+
+        private void ListAnswersSecondOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            _isOpenSecondHalfINfo = !_isOpenSecondHalfINfo;
+            UpdateSecondList();
+            _isOpenSecondHalfINfo = !_isOpenSecondHalfINfo;
+            UpdateSecondList();
+        }
+
+        private void SecondHalfButtonInfoOnClick(object sender, RoutedEventArgs e)
+        {
+            _isOpenSecondHalfINfo = !_isOpenSecondHalfINfo;
+            UpdateSecondList();
+        }
+
+        private void UpdateSecondList()
+        {
+            if (_isOpenSecondHalfINfo)
+            {
+                var scroll = new ScrollViewer();
+                var stack = new StackPanel();
+                foreach (var answer in _haqCalculator.SecondHalf.ListAnswers)
+                {
+                    var textBlock = new TextBox {Text = answer, TextWrapping = TextWrapping.Wrap};
+                    textBlock.TextChanged += TextBlockSecondOnTextChanged;
+                    stack.Children.Add(textBlock);
+                }
+                scroll.Content = stack;
+                Grid.SetRow(scroll, 2);
+                SecondHalfInfo.Children.Add(scroll);
+            }
+            else
+            {
+                SecondHalfInfo.Children.RemoveAt(SecondHalfInfo.Children.Count - 1);
+            }
+        }
+
+        private void TextBlockSecondOnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            _isOpenSecondHalfINfo = !_isOpenSecondHalfINfo;
+            UpdateSecondList();
+            _isOpenSecondHalfINfo = !_isOpenSecondHalfINfo;
+            UpdateSecondList();
+        }
+
+        #endregion
+
         private void InitializeTest(bool isReinitialize)
         {
-            _haqCalculator.IncludeChapters = 8;
+            _haqCalculator.IncludeChapters = 0;
             _haqCalculator.TotalPoints = 0;
             _haqCalculator.Haq = 0;
             _haqCalculator.DressingAndPersonalCare.IsEnabled = false;
+            _haqCalculator.DressingAndPersonalCare.TotalPoints = 0;
             _haqCalculator.GettingUp.IsEnabled = false;
+            _haqCalculator.GettingUp.TotalPoints = 0;
             _haqCalculator.Meal.IsEnabled = false;
+            _haqCalculator.Meal.TotalPoints = 0;
             _haqCalculator.Walks.IsEnabled = false;
+            _haqCalculator.Walks.TotalPoints = 0;
             _haqCalculator.Hygiene.IsEnabled = false;
+            _haqCalculator.Hygiene.TotalPoints = 0;
             _haqCalculator.AchievableRange.IsEnabled = false;
+            _haqCalculator.AchievableRange.TotalPoints = 0;
             _haqCalculator.PowerBrushes.IsEnabled = false;
+            _haqCalculator.PowerBrushes.TotalPoints = 0;
             _haqCalculator.OtherActivities.IsEnabled = false;
+            _haqCalculator.OtherActivities.TotalPoints = 0;
+
+            _haqCalculator.FirstHalf.TotalPoints = 0;
+            _haqCalculator.SecondHalf.TotalPoints = 0;
+
+            _haqCalculator.FirstHalf.ListAnswers = new();
+            _haqCalculator.SecondHalf.ListAnswers = new();
+            
             SetEnabledProperty(_haqCalculator.DressingAndPersonalCare, IndicatorDressingAndPersonalCare,
                 IndicatorDressingAndPersonalCareResult);
             SetEnabledProperty(_haqCalculator.GettingUp, IndicatorGettingUp, 
@@ -175,7 +320,10 @@ namespace HAQ_Calculator
             if (_haqCalculator.IncludeChapters < 6)
                 _haqCalculator.Haq = -1;
             else
+            {
                 _haqCalculator.Haq = _haqCalculator.TotalPoints / _haqCalculator.IncludeChapters;
+                _haqCalculator.DeltaHaq = _haqCalculator.Haq / _haqCalculator.PrevHaq;
+            }
         }
 
         private void EnabledChanged(object sender, RoutedEventArgs e)
@@ -220,6 +368,7 @@ namespace HAQ_Calculator
         private void OutputResult(object sender, RoutedEventArgs e)
         {
             _haqCalculator.Haq = _haqCalculator.TotalPoints / _haqCalculator.IncludeChapters;
+            _haqCalculator.DeltaHaq = _haqCalculator.Haq / _haqCalculator.PrevHaq;
             if (_haqCalculator.IncludeChapters < 6)
                 MessageBox.Show(
                     $"Кол-во учитываемых разделов должно быть ≥ 6\nСейчас учитывается лишь {_haqCalculator.IncludeChapters}",

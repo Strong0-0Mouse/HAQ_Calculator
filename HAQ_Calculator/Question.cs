@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,11 +10,11 @@ namespace HAQ_Calculator
     {
         private readonly string _questionText;
         private readonly List<string> _answers;
-        private readonly Panel _stack;
         private readonly Chapters _chapter;
         private readonly HaqCalculator _haqCalculator;
-        private int _point;
         private readonly int _questionNum;
+        private int _idLastAnswerFirstInList;
+        private int _idLastAnswerSecondInList;
 
         public Question(string questionText, HaqCalculator haqCalculator, Chapters chapter, int questionNum,
             List<string> answers = null)
@@ -103,6 +102,16 @@ namespace HAQ_Calculator
             return mainBorder;
         }
 
+        private void OnLastAnswerFirstTextBoxChanged(object sender, TextChangedEventArgs textChangedEventArgs)
+        {
+            _haqCalculator.FirstHalf.ListAnswers[_idLastAnswerFirstInList] = (sender as TextBox)!.Text;
+        }
+        
+        private void OnLastAnswerSecondTextBoxChanged(object sender, TextChangedEventArgs textChangedEventArgs)
+        {
+            _haqCalculator.SecondHalf.ListAnswers[_idLastAnswerSecondInList] = (sender as TextBox)!.Text;
+        }
+
         private void ButtonOnClick(object sender, RoutedEventArgs e)
         {
             var answerNum = int.Parse((sender as CheckBox)!.Name.Remove(0, 1));
@@ -110,10 +119,36 @@ namespace HAQ_Calculator
             {
                 case Chapters.FirstHalfFixtures:
                     if (answerNum == _answers.Count - 1 && (sender as CheckBox)?.IsChecked == true)
-                        ((sender as CheckBox)!.Parent as StackPanel)!.Children.Add(new TextBox { Margin= new Thickness(0, 10, 10, 10), FontSize=16});
+                    {
+                        var textBox = new TextBox
+                            {Margin = new Thickness(0, 10, 10, 10), FontSize = 16};
+                        textBox.TextChanged += OnLastAnswerFirstTextBoxChanged; 
+                        ((sender as CheckBox)!.Parent as StackPanel)!.Children.Add(textBox);
+                    }
                     else if (answerNum == _answers.Count - 1 && (sender as CheckBox)?.IsChecked == false)
                         ((sender as CheckBox)!.Parent as StackPanel)!.Children.RemoveAt(
                             ((sender as CheckBox)!.Parent as StackPanel)!.Children.Count - 1);
+                    if ((sender as CheckBox)?.IsChecked == true)
+                    {
+                        if (answerNum != _answers.Count - 1)
+                            _haqCalculator.FirstHalf.ListAnswers.Add(((sender as CheckBox)!.Content as TextBlock)!.Text);
+                        else
+                        {
+                            _haqCalculator.FirstHalf.ListAnswers.Add(string.Empty);
+                            _idLastAnswerFirstInList = _haqCalculator.FirstHalf.ListAnswers.Count - 1;
+                        }
+                    }
+                    else
+                    {
+                        if (answerNum != _answers.Count - 1)
+                            _haqCalculator.FirstHalf.ListAnswers.Remove(_haqCalculator.FirstHalf.ListAnswers.First(x =>
+                                x.Equals(((sender as CheckBox)!.Content as TextBlock)!.Text)));
+                        else
+                        {
+                            _haqCalculator.FirstHalf.ListAnswers.RemoveAt(_idLastAnswerFirstInList);
+                            _idLastAnswerFirstInList = -1;
+                        }
+                    }
                     SetForHalfPoints(_haqCalculator.FirstHalf,
                         (sender as CheckBox)?.IsChecked == true);
                     break;
@@ -140,10 +175,36 @@ namespace HAQ_Calculator
                     break;
                 case Chapters.SecondHalfFixtures:
                     if (answerNum == _answers.Count - 1 && (sender as CheckBox)?.IsChecked == true)
-                        ((sender as CheckBox)!.Parent as StackPanel)!.Children.Add(new TextBox { Margin = new Thickness(0, 10, 10, 10), FontSize = 16 });
+                    {
+                        var textBox = new TextBox
+                            {Margin = new Thickness(0, 10, 10, 10), FontSize = 16};
+                        textBox.TextChanged += OnLastAnswerSecondTextBoxChanged; 
+                        ((sender as CheckBox)!.Parent as StackPanel)!.Children.Add(textBox);
+                    }
                     else if (answerNum == _answers.Count - 1 && (sender as CheckBox)?.IsChecked == false)
                         ((sender as CheckBox)!.Parent as StackPanel)!.Children.RemoveAt(
                             ((sender as CheckBox)!.Parent as StackPanel)!.Children.Count - 1);
+                    if ((sender as CheckBox)?.IsChecked == true)
+                    {
+                        if (answerNum != _answers.Count - 1)
+                            _haqCalculator.SecondHalf.ListAnswers.Add(((sender as CheckBox)!.Content as TextBlock)!.Text);
+                        else
+                        {
+                            _haqCalculator.SecondHalf.ListAnswers.Add(string.Empty);
+                            _idLastAnswerSecondInList = _haqCalculator.SecondHalf.ListAnswers.Count - 1;
+                        }
+                    }
+                    else
+                    {
+                        if (answerNum != _answers.Count - 1)
+                            _haqCalculator.SecondHalf.ListAnswers.Remove(_haqCalculator.SecondHalf.ListAnswers.First(x =>
+                                x.Equals(((sender as CheckBox)!.Content as TextBlock)!.Text)));
+                        else
+                        {
+                            _haqCalculator.SecondHalf.ListAnswers.RemoveAt(_idLastAnswerSecondInList);
+                            _idLastAnswerSecondInList = -1;
+                        }
+                    }
                     SetForHalfPoints(_haqCalculator.SecondHalf,
                         (sender as CheckBox)?.IsChecked == true);
                     break;
@@ -185,6 +246,7 @@ namespace HAQ_Calculator
             }
 
             _haqCalculator.Haq = _haqCalculator.TotalPoints / _haqCalculator.IncludeChapters;
+            _haqCalculator.DeltaHaq = _haqCalculator.Haq / _haqCalculator.PrevHaq;
         }
         
         private void SetQuestionPointsValue(Chapter chapter, bool isIncrease)
@@ -206,6 +268,7 @@ namespace HAQ_Calculator
             chapter.TotalPoints = chapter.QuestionsPoints.Max();
             _haqCalculator.TotalPoints += chapter.TotalPoints;
             _haqCalculator.Haq = _haqCalculator.TotalPoints / _haqCalculator.IncludeChapters;
+            _haqCalculator.DeltaHaq = _haqCalculator.Haq / _haqCalculator.PrevHaq;
         }
 
         private void SetQuestionPointsValue(Chapter chapter, int value)
@@ -215,6 +278,7 @@ namespace HAQ_Calculator
             chapter.TotalPoints = chapter.QuestionsPoints.Max();
             _haqCalculator.TotalPoints += chapter.TotalPoints;
             _haqCalculator.Haq = _haqCalculator.TotalPoints / _haqCalculator.IncludeChapters;
+            _haqCalculator.DeltaHaq = _haqCalculator.Haq / _haqCalculator.PrevHaq;
         }
 
         private void ButtonOnChecked(object sender, RoutedEventArgs e)
