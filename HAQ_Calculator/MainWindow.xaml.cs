@@ -89,6 +89,7 @@ namespace HAQ_Calculator
                 foreach (var answer in _haqCalculator.FirstHalf.ListAnswers)
                 {
                     var textBlock = new TextBox {Text = answer, TextWrapping = TextWrapping.Wrap};
+                    textBlock.FontSize = 16;
                     textBlock.TextChanged += TextBlockFirstOnTextChanged;
                     stack.Children.Add(textBlock);
                 }

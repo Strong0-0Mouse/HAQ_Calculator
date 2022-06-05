@@ -13,6 +13,13 @@
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
+        <Style TargetType="TextBlock" x:Key="AnalyticsTextBlock">
+            <Setter Property="UseLayoutRounding" Value="True"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
         <Style TargetType="Border" x:Key="StandardBorder">
             <Setter Property="UseLayoutRounding" Value="True"/>
             <Setter Property="Margin" Value="5"/>
@@ -38,6 +45,7 @@
             <Setter Property="Background" Value="Gainsboro"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="UseLayoutRounding" Value="True"/>
+            <Setter Property="Padding" Value="5, 2, 5, 2"/>
             <Style.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -84,7 +92,7 @@
                         <GroupBox.Header>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <TextBlock Style="{StaticResource StandardTextBlock}" />
-                                <Button Style="{StaticResource StandardButton}" Content="  Не учитывать раздел  "/>
+                                <Button Style="{StaticResource StandardButton}" Content="Не учитывать раздел"/>
                             </StackPanel>
                         </GroupBox.Header>
                         <StackPanel x:Name="QuestionsDressingAndPersonalCare" IsEnabled="{Binding DressingAndPersonalCare.IsEnabled}">
@@ -96,7 +104,7 @@
                         <GroupBox.Header>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <TextBlock Style="{StaticResource StandardTextBlock}"/>
-                                <Button Style="{StaticResource StandardButton}" Content="  Не учитывать раздел  "/>
+                                <Button Style="{StaticResource StandardButton}" Content="Не учитывать раздел"/>
                             </StackPanel>
                         </GroupBox.Header>
                         <StackPanel x:Name="QuestionsGettingUp" IsEnabled="{Binding GettingUp.IsEnabled}">
@@ -108,7 +116,7 @@
                         <GroupBox.Header>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <TextBlock Style="{StaticResource StandardTextBlock}"/>
-                                <Button Style="{StaticResource StandardButton}" Content="  Не учитывать раздел  "/>
+                                <Button Style="{StaticResource StandardButton}" Content="Не учитывать раздел"/>
                             </StackPanel>
                         </GroupBox.Header>
                         <StackPanel x:Name="QuestionsMeal" IsEnabled="{Binding Meal.IsEnabled}">
@@ -120,7 +128,7 @@
                         <GroupBox.Header>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <TextBlock Style="{StaticResource StandardTextBlock}"/>
-                                <Button Style="{StaticResource StandardButton}" Content="  Не учитывать раздел  "/>
+                                <Button Style="{StaticResource StandardButton}" Content="Не учитывать раздел"/>
                             </StackPanel>
                         </GroupBox.Header>
                         <StackPanel x:Name="QuestionsWalks" IsEnabled="{Binding Walks.IsEnabled}">
@@ -152,7 +160,7 @@
                         <GroupBox.Header>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <TextBlock Style="{StaticResource StandardTextBlock}"/>
-                                <Button Style="{StaticResource StandardButton}" Content="  Не учитывать раздел  "/>
+                                <Button Style="{StaticResource StandardButton}" Content="Не учитывать раздел"/>
                             </StackPanel>
                         </GroupBox.Header>
                         <StackPanel x:Name="QuestionsHygiene" IsEnabled="{Binding Hygiene.IsEnabled}">
@@ -164,7 +172,7 @@
                         <GroupBox.Header>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <TextBlock Style="{StaticResource StandardTextBlock}"/>
-                                <Button Style="{StaticResource StandardButton}" Content="  Не учитывать раздел  "/>
+                                <Button Style="{StaticResource StandardButton}" Content="Не учитывать раздел"/>
                             </StackPanel>
                         </GroupBox.Header>
                         <StackPanel x:Name="QuestionsAchievableRange" IsEnabled="{Binding AchievableRange.IsEnabled}">
@@ -176,7 +184,7 @@
                         <GroupBox.Header>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <TextBlock Style="{StaticResource StandardTextBlock}"/>
-                                <Button Style="{StaticResource StandardButton}" Content="  Не учитывать раздел  "/>
+                                <Button Style="{StaticResource StandardButton}" Content="Не учитывать раздел"/>
                             </StackPanel>
                         </GroupBox.Header>
                         <StackPanel x:Name="QuestionsPowerBrushes" IsEnabled="{Binding PowerBrushes.IsEnabled}">
@@ -188,7 +196,7 @@
                         <GroupBox.Header>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <TextBlock Style="{StaticResource StandardTextBlock}"/>
-                                <Button Style="{StaticResource StandardButton}" Content="  Не учитывать раздел  "/>
+                                <Button Style="{StaticResource StandardButton}" Content="Не учитывать раздел"/>
                             </StackPanel>
                         </GroupBox.Header>
                         <StackPanel x:Name="QuestionsOtherActivities" IsEnabled="{Binding OtherActivities.IsEnabled}">
@@ -225,8 +233,8 @@
                         <StackPanel x:Name="StackPain">
                             <Slider x:Name="SliderPain" Value="0" Minimum="0" Maximum="100" SmallChange="1" LargeChange="10" IsSelectionRangeEnabled="True" Height="100" ValueChanged="PainChanged"/>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock FontSize="16" Text="Значние: "/>
-                                <TextBox FontSize="16" Text="{Binding Pain}" TextChanged="PainTextChanged"/>
+                                <TextBlock FontSize="18" Text="Значние: "/>
+                                <TextBox FontSize="18" Text="{Binding Pain}" TextChanged="PainTextChanged"/>
                             </StackPanel>
                         </StackPanel>
                     </GroupBox>
@@ -327,67 +335,67 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
-                <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <TextBlock FontSize="14" Text="{Binding DressingAndPersonalCare.TotalPoints, StringFormat=Одевание и уход за собой: {0}б.}" Margin="10"/>
+                <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#e8f5f7">
+                    <TextBlock Text="{Binding DressingAndPersonalCare.TotalPoints, StringFormat=Одевание и уход за собой: {0}б.}" Style="{StaticResource AnalyticsTextBlock}" />
                 </Border>
-                <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <TextBlock FontSize="14" Text="{Binding GettingUp.TotalPoints, StringFormat=Вставание: {0}б.}" Margin="10"/>
+                <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#e8f5f7">
+                    <TextBlock Text="{Binding GettingUp.TotalPoints, StringFormat=Вставание: {0}б.}" Style="{StaticResource AnalyticsTextBlock}"/>
                 </Border>
-                <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <TextBlock FontSize="14" Text="{Binding Meal.TotalPoints, StringFormat=Прием пищи: {0}б.}" Margin="10"/>
+                <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#e8f5f7">
+                    <TextBlock Text="{Binding Meal.TotalPoints, StringFormat=Прием пищи: {0}б.}" Style="{StaticResource AnalyticsTextBlock}"/>
                 </Border>
-                <Border Grid.Row="3" Grid.Column="0" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <TextBlock FontSize="14" Text="{Binding Walks.TotalPoints, StringFormat=Прогулки: {0}б.}" Margin="10"/>
+                <Border Grid.Row="3" Grid.Column="0" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#e8f5f7">
+                    <TextBlock Text="{Binding Walks.TotalPoints, StringFormat=Прогулки: {0}б.}" Style="{StaticResource AnalyticsTextBlock}"/>
                 </Border>
-                <Border Grid.Row="4" Grid.Column="0" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Border Grid.Row="4" Grid.Column="0" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#e8f5f7">
                     <Grid x:Name="FirstHalfInfo">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="2*"/>
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock FontSize="14" Text="{Binding FirstHalf.TotalPoints, StringFormat=Приспособления: {0}б.}" Margin="10"/>
-                            <Button x:Name="FirstHalfButtonInfo" Content="▼" Style="{StaticResource StandardButton}"/>
+                        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="{Binding FirstHalf.TotalPoints, StringFormat=Приспособления: {0}б.}" Style="{StaticResource AnalyticsTextBlock}"/>
+                            <Button x:Name="FirstHalfButtonInfo" Content="▼" Style="{StaticResource StandardButton}" Height="30" Width="20"/>
                         </StackPanel>                        
                     </Grid>
                 </Border>
-                
-                
-                <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <TextBlock FontSize="14" Text="{Binding Hygiene.TotalPoints, StringFormat=Гигиена: {0}б.}" Margin="10"/>
+
+
+                <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#e8f5f7">
+                    <TextBlock Text="{Binding Hygiene.TotalPoints, StringFormat=Гигиена: {0}б.}" Style="{StaticResource AnalyticsTextBlock}"/>
                 </Border>
-                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <TextBlock FontSize="14" Text="{Binding AchievableRange.TotalPoints, StringFormat=Достижимый радиус действия: {0}б.}" Margin="10"/>
+                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#e8f5f7">
+                    <TextBlock Text="{Binding AchievableRange.TotalPoints, StringFormat=Достижимый радиус действия: {0}б.}" Style="{StaticResource AnalyticsTextBlock}"/>
                 </Border>
-                <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <TextBlock FontSize="14" Text="{Binding PowerBrushes.TotalPoints, StringFormat=Сила кистей: {0}б.}" Margin="10"/>
+                <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#e8f5f7">
+                    <TextBlock Text="{Binding PowerBrushes.TotalPoints, StringFormat=Сила кистей: {0}б.}" Style="{StaticResource AnalyticsTextBlock}"/>
                 </Border>
-                <Border Grid.Row="3" Grid.Column="1" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <TextBlock FontSize="14" Text="{Binding OtherActivities.TotalPoints, StringFormat=Прочие виды деятельности: {0}б.}" Margin="10"/>
-                </Border>                
-                <Border Grid.Row="4" Grid.Column="1" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Border Grid.Row="3" Grid.Column="1" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#e8f5f7">
+                    <TextBlock Text="{Binding OtherActivities.TotalPoints, StringFormat=Прочие виды деятельности: {0}б.}" Style="{StaticResource AnalyticsTextBlock}"/>
+                </Border>
+                <Border Grid.Row="4" Grid.Column="1" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#e8f5f7">
                     <Grid x:Name="SecondHalfInfo">                        
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="2*"/>
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock FontSize="14" Text="{Binding SecondHalf.TotalPoints, StringFormat=Приспособления: {0}б.}" Margin="10"/>
-                            <Button x:Name="SecondHalfButtonInfo" Content="▼" Style="{StaticResource StandardButton}"/>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="{Binding SecondHalf.TotalPoints, StringFormat=Приспособления: {0}б.}" Style="{StaticResource AnalyticsTextBlock}"/>
+                            <Button x:Name="SecondHalfButtonInfo" Content="▼" Style="{StaticResource StandardButton}" Height="30" Width="20" />
                         </StackPanel>                        
                     </Grid>
-                </Border>                
+                </Border>
 
-                <Border Grid.Row="0" Grid.Column="2" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Border Grid.Row="0" Grid.Column="2" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#e8f5f7">
                     <StackPanel Margin="10" HorizontalAlignment="Center">
-                        <TextBlock FontSize="14" Text="ВАШ"  HorizontalAlignment="Center"/>
-                        <TextBlock FontSize="14" Text="{Binding Pain}"  HorizontalAlignment="Center"/>
+                        <TextBlock Text="ВАШ" Style="{StaticResource AnalyticsTextBlock}"/>
+                        <TextBlock FontSize="18" Text="{Binding Pain}"  HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Border>
 
-                <Border Grid.Row="1" Grid.Column="2" Grid.RowSpan="4" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Border Grid.Row="1" Grid.Column="2" Grid.RowSpan="4" Style="{StaticResource StandardBorder}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#e8f5f7">
                     <GroupBox Style="{StaticResource MultiplyQuestionGroupBox}">
                         <GroupBox.Header>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -396,16 +404,16 @@
                         </GroupBox.Header>
                         <StackPanel Margin="10" HorizontalAlignment="Center">
                             <StackPanel Margin="10" Orientation="Horizontal">
-                                <TextBlock FontSize="14" Text="Предыдущий HAQ: "/>
-                                <TextBox x:Name="PrevHaqValue" FontSize="14" MinWidth="20"/>
+                                <TextBlock FontSize="18" Text="Предыдущий HAQ: "/>
+                                <TextBox x:Name="PrevHaqValue" FontSize="14" MinWidth="25"/>
                             </StackPanel>
                             <StackPanel Margin="10" Orientation="Horizontal">
-                                <TextBlock FontSize="14" Text="Нынешний HAQ: "/>
-                                <TextBlock FontSize="14" Text="{Binding Haq}"/>
+                                <TextBlock FontSize="18" Text="Нынешний HAQ: "/>
+                                <TextBlock FontSize="18" Text="{Binding Haq}"/>
                             </StackPanel>
                             <StackPanel Margin="10" Orientation="Horizontal">
-                                <TextBlock FontSize="14" Text="ΔHAQ: "/>
-                                <TextBlock FontSize="14" Text="{Binding DeltaHaq}"/>
+                                <TextBlock FontSize="18" Text="ΔHAQ: "/>
+                                <TextBlock FontSize="18" Text="{Binding DeltaHaq}"/>
                             </StackPanel>
                         </StackPanel>
                     </GroupBox>
