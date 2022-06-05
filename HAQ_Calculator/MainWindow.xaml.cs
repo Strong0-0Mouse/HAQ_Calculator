@@ -48,15 +48,15 @@ namespace HAQ_Calculator
         {
             try
             {
-                var value = double.Parse((sender as TextBox)!.Text);
+                var value = double.Parse((sender as TextBox)!.Text.Replace(".", ","));
                 (sender as TextBox)!.Text = value switch
                 {
                     > 3.5 => "3.5",
                     < 0 => "0",
                     _ => (sender as TextBox)!.Text
                 };
-                _haqCalculator.PrevHaq = double.Parse((sender as TextBox)!.Text);
-                _haqCalculator.DeltaHaq = _haqCalculator.Haq / _haqCalculator.PrevHaq;
+                _haqCalculator.PrevHaq = double.Parse((sender as TextBox)!.Text.Replace(".", ","));
+                _haqCalculator.DeltaHaq = _haqCalculator.Haq - _haqCalculator.PrevHaq;
             }
             catch
             {
@@ -138,6 +138,7 @@ namespace HAQ_Calculator
                 foreach (var answer in _haqCalculator.SecondHalf.ListAnswers)
                 {
                     var textBlock = new TextBox {Text = answer, TextWrapping = TextWrapping.Wrap};
+                    textBlock.FontSize = 16;
                     textBlock.TextChanged += TextBlockSecondOnTextChanged;
                     stack.Children.Add(textBlock);
                 }
@@ -329,7 +330,7 @@ namespace HAQ_Calculator
             else
             {
                 _haqCalculator.Haq = _haqCalculator.TotalPoints / _haqCalculator.IncludeChapters;
-                _haqCalculator.DeltaHaq = _haqCalculator.Haq / _haqCalculator.PrevHaq;
+                _haqCalculator.DeltaHaq = _haqCalculator.Haq - _haqCalculator.PrevHaq;
             }
         }
 
@@ -375,7 +376,7 @@ namespace HAQ_Calculator
         private void OutputResult(object sender, RoutedEventArgs e)
         {
             _haqCalculator.Haq = _haqCalculator.TotalPoints / _haqCalculator.IncludeChapters;
-            _haqCalculator.DeltaHaq = _haqCalculator.Haq / _haqCalculator.PrevHaq;
+            _haqCalculator.DeltaHaq = _haqCalculator.Haq - _haqCalculator.PrevHaq;
             if (_haqCalculator.IncludeChapters < 6)
                 MessageBox.Show(
                     $"Кол-во учитываемых разделов должно быть ≥ 6\nСейчас учитывается лишь {_haqCalculator.IncludeChapters}",

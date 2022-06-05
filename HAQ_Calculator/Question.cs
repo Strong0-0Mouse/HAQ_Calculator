@@ -246,7 +246,7 @@ namespace HAQ_Calculator
             }
 
             _haqCalculator.Haq = _haqCalculator.TotalPoints / _haqCalculator.IncludeChapters;
-            _haqCalculator.DeltaHaq = _haqCalculator.Haq / _haqCalculator.PrevHaq;
+            _haqCalculator.DeltaHaq = _haqCalculator.Haq - _haqCalculator.PrevHaq;
         }
         
         private void SetQuestionPointsValue(Chapter chapter, bool isIncrease)
@@ -268,7 +268,7 @@ namespace HAQ_Calculator
             chapter.TotalPoints = chapter.QuestionsPoints.Max();
             _haqCalculator.TotalPoints += chapter.TotalPoints;
             _haqCalculator.Haq = _haqCalculator.TotalPoints / _haqCalculator.IncludeChapters;
-            _haqCalculator.DeltaHaq = _haqCalculator.Haq / _haqCalculator.PrevHaq;
+            _haqCalculator.DeltaHaq = _haqCalculator.Haq - _haqCalculator.PrevHaq;
         }
 
         private void SetQuestionPointsValue(Chapter chapter, int value)

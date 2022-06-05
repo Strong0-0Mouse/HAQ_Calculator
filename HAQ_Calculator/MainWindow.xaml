@@ -357,7 +357,7 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
                             <TextBlock Text="{Binding FirstHalf.TotalPoints, StringFormat=Приспособления: {0}б.}" Style="{StaticResource AnalyticsTextBlock}"/>
-                            <Button x:Name="FirstHalfButtonInfo" Content="▼" Style="{StaticResource StandardButton}" Height="30" Width="20"/>
+                            <Button x:Name="FirstHalfButtonInfo" Content="Показать" Style="{StaticResource StandardButton}" Height="30"/>
                         </StackPanel>                        
                     </Grid>
                 </Border>
@@ -383,7 +383,7 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
                             <TextBlock Text="{Binding SecondHalf.TotalPoints, StringFormat=Приспособления: {0}б.}" Style="{StaticResource AnalyticsTextBlock}"/>
-                            <Button x:Name="SecondHalfButtonInfo" Content="▼" Style="{StaticResource StandardButton}" Height="30" Width="20" />
+                            <Button x:Name="SecondHalfButtonInfo" Content="Показать" Style="{StaticResource StandardButton}" Height="30"/>
                         </StackPanel>                        
                     </Grid>
                 </Border>
