@@ -188,21 +188,21 @@ namespace HAQ_Calculator
             _haqCalculator.FirstHalf.ListAnswers = new();
             _haqCalculator.SecondHalf.ListAnswers = new();
             
-            SetEnabledProperty(_haqCalculator.DressingAndPersonalCare, IndicatorDressingAndPersonalCare,
+            SetEnabledProperty(_haqCalculator.DressingAndPersonalCare, IndicatorDressingAndPersonalCare, DressingAndPersonalCare,
                 IndicatorDressingAndPersonalCareResult);
-            SetEnabledProperty(_haqCalculator.GettingUp, IndicatorGettingUp, 
+            SetEnabledProperty(_haqCalculator.GettingUp, IndicatorGettingUp, GettingUp,
                 IndicatorGettingUpResult);
-            SetEnabledProperty(_haqCalculator.Meal, IndicatorMeal, 
+            SetEnabledProperty(_haqCalculator.Meal, IndicatorMeal, Meal,
                 IndicatorMealResult);
-            SetEnabledProperty(_haqCalculator.Walks, IndicatorWalks, 
+            SetEnabledProperty(_haqCalculator.Walks, IndicatorWalks, Walks,
                 IndicatorWalksResult);
-            SetEnabledProperty(_haqCalculator.Hygiene, IndicatorHygiene, 
+            SetEnabledProperty(_haqCalculator.Hygiene, IndicatorHygiene, Hygiene,
                 IndicatorHygieneResult);
-            SetEnabledProperty(_haqCalculator.AchievableRange, IndicatorAchievableRange,
+            SetEnabledProperty(_haqCalculator.AchievableRange, IndicatorAchievableRange, AchievableRange,
                 IndicatorAchievableRangeResult);
-            SetEnabledProperty(_haqCalculator.PowerBrushes, IndicatorPowerBrushes, 
+            SetEnabledProperty(_haqCalculator.PowerBrushes, IndicatorPowerBrushes, PowerBrushes,
                 IndicatorPowerBrushesResult);
-            SetEnabledProperty(_haqCalculator.OtherActivities, IndicatorOtherActivities, 
+            SetEnabledProperty(_haqCalculator.OtherActivities, IndicatorOtherActivities, OtherActivities,
                 IndicatorOtherActivitiesResult);
             AddQuestions("Одевание и уход за собой", DressingAndPersonalCare, isReinitialize, QuestionsDressingAndPersonalCare);
             AddQuestions("Вставание", GettingUp, isReinitialize, QuestionsGettingUp);
@@ -296,11 +296,14 @@ namespace HAQ_Calculator
             }
         }
 
-        private void SetEnabledProperty(Chapter chapter, Ellipse item, Ellipse resultItem = null)
+        private void SetEnabledProperty(Chapter chapter, Ellipse item, GroupBox box, Ellipse resultItem = null)
         {
             if (chapter.IsEnabled)
             {
                 chapter.IsEnabled = false;
+                box.Background = new SolidColorBrush(Colors.Gainsboro);
+                ((box.Header as StackPanel)!.Children[0] as TextBlock)!.Margin = new Thickness(0, 0, 0, 20);
+                ((box.Header as StackPanel)!.Children[1] as Button)!.Content = "Учитывать раздел";
                 item.Fill = Brushes.Red;
                 if (resultItem != null) 
                     resultItem.Fill = Brushes.Red;
@@ -310,6 +313,9 @@ namespace HAQ_Calculator
             else
             {
                 chapter.IsEnabled = true;
+                box.Background = null;
+                ((box.Header as StackPanel)!.Children[0] as TextBlock)!.Margin = new Thickness(0, 0, 0, 0);
+                ((box.Header as StackPanel)!.Children[1] as Button)!.Content = "Не учитывать раздел";
                 item.Fill = Brushes.Green;
                 if (resultItem != null) 
                     resultItem.Fill = Brushes.Green;
@@ -331,35 +337,35 @@ namespace HAQ_Calculator
             switch (_haqCalculator.ActiveChapter)
             {
                 case Chapters.DressingAndPersonalCare:
-                    SetEnabledProperty(_haqCalculator.DressingAndPersonalCare, IndicatorDressingAndPersonalCare,
+                    SetEnabledProperty(_haqCalculator.DressingAndPersonalCare, IndicatorDressingAndPersonalCare, DressingAndPersonalCare,
                         IndicatorDressingAndPersonalCareResult);
                     break;
                 case Chapters.GettingUp:
-                    SetEnabledProperty(_haqCalculator.GettingUp, IndicatorGettingUp, 
+                    SetEnabledProperty(_haqCalculator.GettingUp, IndicatorGettingUp, GettingUp,
                         IndicatorGettingUpResult);
                     break;
                 case Chapters.Meal:
-                    SetEnabledProperty(_haqCalculator.Meal, IndicatorMeal, 
+                    SetEnabledProperty(_haqCalculator.Meal, IndicatorMeal, Meal,
                         IndicatorMealResult);
                     break;
                 case Chapters.Walks:
-                    SetEnabledProperty(_haqCalculator.Walks, IndicatorWalks, 
+                    SetEnabledProperty(_haqCalculator.Walks, IndicatorWalks, Walks,
                         IndicatorWalksResult);
                     break;
                 case Chapters.Hygiene:
-                    SetEnabledProperty(_haqCalculator.Hygiene, IndicatorHygiene, 
+                    SetEnabledProperty(_haqCalculator.Hygiene, IndicatorHygiene, Hygiene,
                         IndicatorHygieneResult);
                     break;
                 case Chapters.AchievableRange:
-                    SetEnabledProperty(_haqCalculator.AchievableRange, IndicatorAchievableRange,
+                    SetEnabledProperty(_haqCalculator.AchievableRange, IndicatorAchievableRange, AchievableRange,
                         IndicatorAchievableRangeResult);
                     break;
                 case Chapters.PowerBrushes:
-                    SetEnabledProperty(_haqCalculator.PowerBrushes, IndicatorPowerBrushes, 
+                    SetEnabledProperty(_haqCalculator.PowerBrushes, IndicatorPowerBrushes, PowerBrushes,
                         IndicatorPowerBrushesResult);
                     break;
                 case Chapters.OtherActivities:
-                    SetEnabledProperty(_haqCalculator.OtherActivities, IndicatorOtherActivities, 
+                    SetEnabledProperty(_haqCalculator.OtherActivities, IndicatorOtherActivities, OtherActivities,
                         IndicatorOtherActivitiesResult);
                     break;
          }

@@ -397,7 +397,7 @@
                         <StackPanel Margin="10" HorizontalAlignment="Center">
                             <StackPanel Margin="10" Orientation="Horizontal">
                                 <TextBlock FontSize="14" Text="Предыдущий HAQ: "/>
-                                <TextBox x:Name="PrevHaqValue" FontSize="14"/>
+                                <TextBox x:Name="PrevHaqValue" FontSize="14" MinWidth="20"/>
                             </StackPanel>
                             <StackPanel Margin="10" Orientation="Horizontal">
                                 <TextBlock FontSize="14" Text="Нынешний HAQ: "/>
